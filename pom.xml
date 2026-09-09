@@ -45,7 +45,7 @@
         <junit.version>4.13.2</junit.version>
         <lombok.version>1.18.46</lombok.version>
         <rocketmq.version>4.5.2</rocketmq.version>
-        <servlet-api.version>3.0.1</servlet-api.version>
+        <servlet-api.version>4.0.1</servlet-api.version>
         <slf4j.version>2.0.18</slf4j.version>
         <spring.version>5.3.39</spring.version>
         <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
