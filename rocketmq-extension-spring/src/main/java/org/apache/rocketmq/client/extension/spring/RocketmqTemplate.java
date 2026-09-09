@@ -8,8 +8,8 @@ import org.apache.rocketmq.client.consumer.MQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
 import org.apache.rocketmq.client.exception.MQBrokerException;
+import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
-import org.apache.rocketmq.client.producer.LocalTransactionExecuter;
 import org.apache.rocketmq.client.producer.MQProducer;
 import org.apache.rocketmq.client.producer.MessageQueueSelector;
 import org.apache.rocketmq.client.producer.SendCallback;
@@ -161,7 +161,7 @@ public class RocketmqTemplate {
 	 * @throws InterruptedException if the sending thread is interrupted
 	 */
 	public void send(final Message msg, final SendCallback sendCallback)
-			throws MQClientException, RemotingException, InterruptedException {
+			throws MQBrokerException, MQClientException, RemotingException, InterruptedException {
 		producer.send(msg, sendCallback);
 	}
 
@@ -176,7 +176,7 @@ public class RocketmqTemplate {
 	 * @throws InterruptedException if the sending thread is interrupted
 	 */
 	public void send(final Message msg, final SendCallback sendCallback, final long timeout)
-			throws MQClientException, RemotingException, InterruptedException {
+			throws MQBrokerException, MQClientException, RemotingException, InterruptedException {
 		producer.send(msg, sendCallback, timeout);
 	}
 
@@ -188,7 +188,7 @@ public class RocketmqTemplate {
 	 * @throws RemotingException    if a network communication error occurs
 	 * @throws InterruptedException if the sending thread is interrupted
 	 */
-	public void sendOneway(final Message msg) throws MQClientException, RemotingException, InterruptedException {
+	public void sendOneway(final Message msg) throws MQBrokerException, MQClientException, RemotingException, InterruptedException {
 		producer.sendOneway(msg);
 	}
 
@@ -236,7 +236,7 @@ public class RocketmqTemplate {
 	 * @throws InterruptedException if the sending thread is interrupted
 	 */
 	public void send(final Message msg, final MessageQueue mq, final SendCallback sendCallback)
-			throws MQClientException, RemotingException, InterruptedException {
+			throws MQBrokerException, MQClientException, RemotingException, InterruptedException {
 		producer.send(msg, mq, sendCallback);
 	}
 
@@ -252,7 +252,7 @@ public class RocketmqTemplate {
 	 * @throws InterruptedException if the sending thread is interrupted
 	 */
 	public void send(final Message msg, final MessageQueue mq, final SendCallback sendCallback, long timeout)
-			throws MQClientException, RemotingException, InterruptedException {
+			throws MQBrokerException, MQClientException, RemotingException, InterruptedException {
 		producer.send(msg, mq, sendCallback, timeout);
 	}
 
@@ -266,7 +266,7 @@ public class RocketmqTemplate {
 	 * @throws InterruptedException if the sending thread is interrupted
 	 */
 	public void sendOneway(final Message msg, final MessageQueue mq)
-			throws MQClientException, RemotingException, InterruptedException {
+			throws MQBrokerException, MQClientException, RemotingException, InterruptedException {
 		producer.sendOneway(msg, mq);
 	}
 
@@ -317,7 +317,7 @@ public class RocketmqTemplate {
 	 * @throws InterruptedException if the sending thread is interrupted
 	 */
 	public void send(final Message msg, final MessageQueueSelector selector, final Object arg,
-			final SendCallback sendCallback) throws MQClientException, RemotingException, InterruptedException {
+			final SendCallback sendCallback) throws MQBrokerException, MQClientException, RemotingException, InterruptedException {
 		producer.send(msg, selector, arg, sendCallback);
 	}
 
@@ -335,7 +335,7 @@ public class RocketmqTemplate {
 	 */
 	public void send(final Message msg, final MessageQueueSelector selector, final Object arg,
 			final SendCallback sendCallback, final long timeout)
-			throws MQClientException, RemotingException, InterruptedException {
+			throws MQBrokerException, MQClientException, RemotingException, InterruptedException {
 		producer.send(msg, selector, arg, sendCallback, timeout);
 	}
 
@@ -350,22 +350,27 @@ public class RocketmqTemplate {
 	 * @throws InterruptedException if the sending thread is interrupted
 	 */
 	public void sendOneway(final Message msg, final MessageQueueSelector selector, final Object arg)
-			throws MQClientException, RemotingException, InterruptedException {
+			throws MQBrokerException, MQClientException, RemotingException, InterruptedException {
 		producer.sendOneway(msg, selector, arg);
 	}
 
 	/**
-	 * Sends a transactional message.
+	 * Sends a transactional message using the half-message + broker-driven
+	 * local-transaction-check flow.
 	 *
-	 * @param msg          the {@link Message} to send
-	 * @param tranExecuter the local transaction executor
-	 * @param arg          the argument passed to the executor
+	 * <p><b>Changed in RocketMQ 5.x</b>: the legacy {@code LocalTransactionExecuter}
+	 * callback parameter was dropped from RocketMQ 5.0. Local transaction state is now
+	 * resolved on the producer/broker side; this method forwards to
+	 * {@code MQProducer#sendMessageInTransaction(Message, Object)}.</p>
+	 *
+	 * @param msg the {@link Message} to send
+	 * @param arg the argument passed to the transaction listener
 	 * @return the {@link TransactionSendResult} from the broker
 	 * @throws MQClientException if the RocketMQ client encounters an error
 	 */
 	public TransactionSendResult sendMessageInTransaction(final Message msg,
-			final LocalTransactionExecuter tranExecuter, final Object arg) throws MQClientException {
-		return producer.sendMessageInTransaction(msg, tranExecuter, arg);
+			final Object arg) throws MQClientException {
+		return producer.sendMessageInTransaction(msg, arg);
 	}
 
 	/**
