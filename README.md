@@ -79,7 +79,7 @@ Typical scenarios:
 | JDK                    | 8                                    | 17                                   | 21                                   |
 | Maven                  | 3.9.16                               | 3.9.16                               | 4.0.0-rc-5                           |
 | RocketMQ               | 4.5.2 (`rocketmq-client`, `rocketmq-common`) | 4.5.2                          | 4.5.2                                |
-| Spring Framework       | 5.3.39 (final 5.3.x; JDK 8 line)     | 6.2.19                               | 7.0.8                                |
+| Spring Framework       | 5.3.39 (final 5.3.x; JDK 8 line)     | 6.2.19                               | **7.0.9**                            |
 | disruptor-extension    | 1.0.x.20260630-SNAPSHOT             | 2.0.x.20260630-SNAPSHOT              | 3.0.x.20260630-SNAPSHOT              |
 | junit-jupiter          | 5.11.4                               | 6.1.0                                | 6.1.0                                |
 
@@ -320,7 +320,7 @@ mvn -pl rocketmq-extension-spring test
 | :---------------- | :-- | :---- | :----- | :---------------------------- | :---------------------- |
 | `feature/1.0.x`  | 8   | 3.9.16 | 5.3.39 | `1.0.x.20260630-SNAPSHOT`     | `1.0.x.20260630-SNAPSHOT` |
 | `feature/2.0.x`  | 17  | 3.9.16 | 6.2.19 | `2.0.x.20260630-SNAPSHOT`     | `2.0.x.20260630-SNAPSHOT` |
-| **`feature/3.0.x`**  | **21**  | **4.0.0-rc-5** | **7.0.8** | **`3.0.x.20260630-SNAPSHOT`**   | **`3.0.x.20260630-SNAPSHOT`** |
+| **`feature/3.0.x`**  | **21**  | **4.0.0-rc-5** | **7.0.9** | **`3.0.x.20260630-SNAPSHOT`**   | **`3.0.x.20260630-SNAPSHOT`** |
 
 The three lines are **maintained independently** — a security fix on the JDK 8 line will not
 automatically propagate to the JDK 17/21 lines. Each branch publishes its own jars.
