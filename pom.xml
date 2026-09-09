@@ -45,6 +45,7 @@
         <maven.version>3.9.16</maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <central-maven-publishing-plugin.version>0.11.0</central-maven-publishing-plugin.version>
         <disruptor-extension.version>2.0.x.20260630-SNAPSHOT</disruptor-extension.version>
         <junit-jupiter.version>6.1.0</junit-jupiter.version>
         <junit.version>4.13.2</junit.version>
@@ -56,10 +57,9 @@
         <slf4j.version>2.0.18</slf4j.version>
         <spring.version>6.2.19</spring.version>
 
-        <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
         <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
-        <maven-enforcer-plugin.version>3.6.2</maven-enforcer-plugin.version>
+        <maven-enforcer-plugin.version>3.6.3</maven-enforcer-plugin.version>
         <maven-flatten-plugin.version>1.7.3</maven-flatten-plugin.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
         <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
@@ -410,7 +410,7 @@
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>${central-publishing-maven-plugin.version}</version>
+                        <version>${central-maven-publishing-plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
