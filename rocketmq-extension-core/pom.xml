@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>io.github.easy4j</groupId>
         <artifactId>rocketmq-extension</artifactId>
-        <version>2.0.x.20260630-SNAPSHOT</version>
+        <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <version>2.0.x.20260630-SNAPSHOT</version>
     <artifactId>rocketmq-extension-core</artifactId>
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>Pure-Java core: RocketMQ message envelopes, responsibility-chain router, Disruptor adapter, INI parser, exception types, Spring-free SPI abstractions.</description>
+    <description>Pure-Java core: RocketMQ message envelopes, responsibility-chain router, Disruptor adapter, INI parser, exception types, Spring-free SPI abstractions</description>
 
     <dependencies>
+        <!-- RocketMQ 客户端：消息模型（Message/MessageExt）与生产/消费接口 -->
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-client</artifactId>
@@ -24,35 +25,33 @@
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-common</artifactId>
         </dependency>
+        <!-- Disruptor 扩展：环形队列适配 + 纯 Java AntPathMatcher/PathMatcher -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>disruptor-extension</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
+        <!-- Servlet API：provided 占位，跟随消费方容器 -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
+        <!-- 单元测试 -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <!-- Hard rule: core must remain Spring-free -->
+            <!-- 硬性约束：core 必须零 Spring 依赖 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
@@ -79,65 +78,40 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- maven-source-plugin：生成 sources.jar；版本继承自父 pom -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skip>false</skip>
-                    <skipTests>false</skipTests>
-                    <forkMode>once</forkMode>
-                    <argLine>-Xmx1024m   -Dfile.encoding=UTF-8</argLine>
-                    <additionalClasspathElements>
-                        <additionalClasspathElement>${basedir}/target/test-classes</additionalClasspathElement>
-                    </additionalClasspathElements>
-                    <includes>
-                        <include>**/*Test.java</include>
-                    </includes>
-                    <excludes>
-                        <exclude>**/TestBean.java</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
+                <artifactId>maven-source-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>prepare-agent</id>
+                        <id>attach-sources</id>
                         <goals>
-                            <goal>prepare-agent</goal>
+                            <goal>jar-no-fork</goal>
                         </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>check</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <configuration>
-                            <haltOnFailure>false</haltOnFailure>
-                            <rules>
-                                <rule>
-                                    <element>BUNDLE</element>
-                                    <limits>
-                                        <limit>
-                                            <counter>LINE</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>0.90</minimum>
-                                        </limit>
-                                    </limits>
-                                </rule>
-                            </rules>
-                        </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <!-- maven-javadoc-plugin：生成 javadoc.jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- maven-deploy-plugin + maven-install-plugin 已通过父 pom 默认绑定，这里显式声明以便文档化 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

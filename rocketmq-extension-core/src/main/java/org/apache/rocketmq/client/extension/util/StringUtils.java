@@ -994,8 +994,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/**
-	 * 
-	 * @description	：获得以 ",; \t\n"分割的字符数组
+	 * 获得以 ",; \t\n" 分割的字符数组
 	 * @param str
 	 * @return
 	 */
@@ -1485,8 +1484,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/**
-	 * 
-	 * @description: 圆括号()包裹
+	 * 圆括号()包裹
 	 * @param source
 	 * @return
 	 */
@@ -1495,8 +1493,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/**
-	 * 
-	 * @description: 方括号[]包裹
+	 * 方括号[]包裹
 	 * @param source
 	 * @return
 	 */
@@ -1514,16 +1511,15 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	 * @param str
 	 *            the input String (e.g. "myString")
 	 * @return the quoted String (e.g. "'myString'"), or
-	 *         <code>null<code> if the input was <code>null</code>
+	 *         <code>null</code> if the input was <code>null</code>
 	 */
 	public static String quote(String str) {
 		return (str != null ? "'" + str + "'" : null);
 	}
 
 	/**
-	 * 
-	 * @description: 将String集合元素用'包围，并拼接
-	 * @param list
+	 * 将String数组元素用'包围，并拼接
+	 * @param array
 	 * @param separator
 	 * @return
 	 */
@@ -1554,12 +1550,9 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/**
-	 * 
+	 * 把一个字符串的非Alpha字符都去掉,例如 "1\r\n1\r\n" 结果为 "11"
 	 * @param string
-	 * @return
-	 * @description： 把一个字符的非Alpha字符都去掉,String string = "1\r\n1\r\n";-->结果："11";
-	 * @return: String
-	 * @method: trimToAlphaString
+	 * @return String
 	 */
 	public static String trimToAlphaString(String string) {
 		if (string == null || string.length() == 0) {
@@ -1569,14 +1562,9 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/**
-	 * 
+	 * 把一个字符串的非Alpha字符都去掉，并返回每个字符的数组,例如 "1\r\n1\r\n" 结果为 new String[]{"1","1"}
 	 * @param string
-	 * @return
-	 * @description： 把一个字符的非Alpha字符都去掉，并返回每个字符的数组,String string =
-	 *               "1\r\n1\r\n";-->结果：new String[]{"1","1"};
-	 * 
-	 * @return: String[]
-	 * @method: trimToAlphaStrings
+	 * @return String[]
 	 */
 	public static String[] trimToAlphaStrings(String string) {
 		if (string == null || string.length() == 0) {
