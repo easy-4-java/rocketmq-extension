@@ -44,7 +44,7 @@
         <junit-jupiter.version>5.11.4</junit-jupiter.version>
         <junit.version>4.13.2</junit.version>
         <lombok.version>1.18.46</lombok.version>
-        <rocketmq.version>4.5.2</rocketmq.version>
+        <rocketmq.version>5.5.1</rocketmq.version>
         <servlet-api.version>4.0.1</servlet-api.version>
         <slf4j.version>2.0.18</slf4j.version>
         <spring.version>5.3.39</spring.version>
@@ -146,7 +146,6 @@
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <release>${java.version}</release>
-                        <defaultLibBundleDir>lib</defaultLibBundleDir>
                         <encoding>${project.build.sourceEncoding}</encoding>
                         <maxmem>512M</maxmem>
                     </configuration>
