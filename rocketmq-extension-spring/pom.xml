@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
-    <modelVersion>4.1.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.1.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>io.github.easy4j</groupId>
         <artifactId>rocketmq-extension</artifactId>
+        <version>2.0.x.20260630-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
+    <version>2.0.x.20260630-SNAPSHOT</version>
     <artifactId>rocketmq-extension-spring</artifactId>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Spring adapter for rocketmq-extension-core: FactoryBeans for producer/consumer/chain-dispatcher, SpringRocketmqEvent ApplicationEvent wrapper, RocketmqTemplate, Spring lifecycle hooks.</description>
@@ -15,7 +18,8 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>rocketmq-extension-core</artifactId>
+            <version>2.0.x.20260630-SNAPSHOT</version>
+    <artifactId>rocketmq-extension-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
