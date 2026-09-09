@@ -3,7 +3,6 @@ package org.apache.rocketmq.client.extension.config;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.rocketmq.client.ClientConfig;
 import org.apache.rocketmq.client.producer.TransactionCheckListener;
-import org.apache.rocketmq.common.MixAll;
 
 /**
  * Configuration POJO for a RocketMQ producer.
@@ -35,9 +34,13 @@ public class ProducerConfig extends ClientConfig {
 	private String producerGroup;
 
 	/**
-	 * Just for testing or demo program
+	 * Just for testing or demo program.
+	 *
+	 * <p>Default RocketMQ auto-create-topic key. {@code MixAll.AUTO_CREATE_TOPIC_KEY_TOPIC}
+	 * was removed from RocketMQ 5.x; the underlying broker value ({@code "TBW102"}) is
+	 * unchanged, so we hardcode it here.</p>
 	 */
-	private String createTopicKey = MixAll.AUTO_CREATE_TOPIC_KEY_TOPIC;
+	private String createTopicKey = "TBW102";
 
 	/**
 	 * Number of queues to create per default topic.
