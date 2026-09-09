@@ -18,7 +18,6 @@ import java.util.StringTokenizer;
 import java.util.TimeZone;
 import java.util.TreeSet;
 
-
 /**
  * Extended string utility class that combines Apache Commons Lang {@code StringUtils}
  * with Spring-style path, locale, and collection helpers.
@@ -29,29 +28,33 @@ import java.util.TreeSet;
  */
 public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 
+	private static final String FOLDER_SEPARATOR = "/";
+
 	/**
-	 * Spring-compatible {@code CollectionUtils.isEmpty} replacement for collections.
+	 * Spring-compatible {@code StringUtils.isEmpty} replacement, free of any
+	 * Spring dependency. Returns {@code true} when {@code collection} is null or
+	 * has zero elements.
 	 */
-	public static boolean isEmpty(java.util.Collection<?> collection) {
+	public static boolean isEmpty(Collection<?> collection) {
 		return collection == null || collection.isEmpty();
 	}
 
 	/**
-	 * Spring-compatible {@code CollectionUtils.isEmpty} replacement for maps.
+	 * Spring-compatible {@code StringUtils.isEmpty} replacement for maps.
 	 */
-	public static boolean isEmpty(java.util.Map<?, ?> map) {
+	public static boolean isEmpty(Map<?, ?> map) {
 		return map == null || map.isEmpty();
 	}
 
 	/**
-	 * Spring-compatible {@code ObjectUtils.isEmpty} replacement for arrays.
+	 * Spring-compatible {@code StringUtils.isEmpty} replacement for arrays.
 	 */
 	public static boolean isEmpty(Object[] array) {
 		return array == null || array.length == 0;
 	}
 
 	/**
-	 * Spring-compatible {@code ObjectUtils.nullSafeToString} for arrays.
+	 * Spring-compatible {@code ObjectUtils.nullSafeToString} replacement for arrays.
 	 */
 	public static String nullSafeToString(Object[] array) {
 		if (array == null || array.length == 0) {
@@ -68,7 +71,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/**
-	 * Spring-compatible {@code ObjectUtils.nullSafeToString} for a single object.
+	 * Spring-compatible {@code ObjectUtils.nullSafeToString} replacement for a single object.
 	 */
 	public static String nullSafeToString(Object obj) {
 		if (obj == null) {
@@ -80,8 +83,6 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 			return "<toString failed: " + e.getClass().getSimpleName() + ">";
 		}
 	}
-	
-	private static final String FOLDER_SEPARATOR = "/";
 
 	private static final String WINDOWS_FOLDER_SEPARATOR = "\\";
 
@@ -577,7 +578,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	/**
 	 * Extract the filename from the given path,
-	 * e.g. "mypath/myfile.txt" -> "myfile.txt".
+	 * e.g. {@code "mypath/myfile.txt" -> "myfile.txt"}.
 	 * @param path the file path (may be {@code null})
 	 * @return the extracted filename, or {@code null} if none
 	 */
@@ -591,7 +592,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	/**
 	 * Extract the filename extension from the given path,
-	 * e.g. "mypath/myfile.txt" -> "txt".
+	 * e.g. {@code "mypath/myfile.txt" -> "txt"}.
 	 * @param path the file path (may be {@code null})
 	 * @return the extracted filename extension, or {@code null} if none
 	 */
@@ -612,7 +613,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 
 	/**
 	 * Strip the filename extension from the given path,
-	 * e.g. "mypath/myfile.txt" -> "mypath/myfile".
+	 * e.g. {@code "mypath/myfile.txt" -> "mypath/myfile"}.
 	 * @param path the file path (may be {@code null})
 	 * @return the path with stripped filename extension,
 	 * or {@code null} if none
@@ -993,8 +994,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/**
-	 * 
-	 * @description	：获得以 ",; \t\n"分割的字符数组
+	 * 获得以 ",; \t\n" 分割的字符数组
 	 * @param str
 	 * @return
 	 */
@@ -1484,8 +1484,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/**
-	 * 
-	 * @description: 圆括号()包裹
+	 * 圆括号()包裹
 	 * @param source
 	 * @return
 	 */
@@ -1494,8 +1493,7 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/**
-	 * 
-	 * @description: 方括号[]包裹
+	 * 方括号[]包裹
 	 * @param source
 	 * @return
 	 */
@@ -1513,16 +1511,15 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	 * @param str
 	 *            the input String (e.g. "myString")
 	 * @return the quoted String (e.g. "'myString'"), or
-	 *         <code>null<code> if the input was <code>null</code>
+	 *         <code>null</code> if the input was <code>null</code>
 	 */
 	public static String quote(String str) {
 		return (str != null ? "'" + str + "'" : null);
 	}
 
 	/**
-	 * 
-	 * @description: 将String集合元素用'包围，并拼接
-	 * @param list
+	 * 将String数组元素用'包围，并拼接
+	 * @param array
 	 * @param separator
 	 * @return
 	 */
@@ -1553,12 +1550,9 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/**
-	 * 
+	 * 把一个字符串的非Alpha字符都去掉,例如 "1\r\n1\r\n" 结果为 "11"
 	 * @param string
-	 * @return
-	 * @description： 把一个字符的非Alpha字符都去掉,String string = "1\r\n1\r\n";-->结果："11";
-	 * @return: String
-	 * @method: trimToAlphaString
+	 * @return String
 	 */
 	public static String trimToAlphaString(String string) {
 		if (string == null || string.length() == 0) {
@@ -1568,14 +1562,9 @@ public abstract class StringUtils extends org.apache.commons.lang3.StringUtils {
 	}
 
 	/**
-	 * 
+	 * 把一个字符串的非Alpha字符都去掉，并返回每个字符的数组,例如 "1\r\n1\r\n" 结果为 new String[]{"1","1"}
 	 * @param string
-	 * @return
-	 * @description： 把一个字符的非Alpha字符都去掉，并返回每个字符的数组,String string =
-	 *               "1\r\n1\r\n";-->结果：new String[]{"1","1"};
-	 * 
-	 * @return: String[]
-	 * @method: trimToAlphaStrings
+	 * @return String[]
 	 */
 	public static String[] trimToAlphaStrings(String string) {
 		if (string == null || string.length() == 0) {
