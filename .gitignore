@@ -133,3 +133,8 @@ CLAUDE.md
 *.http
 *.json
 qodana.yaml
+
+**/target/
+/.idea/
+
+.DS_Store
