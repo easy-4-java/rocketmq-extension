@@ -43,7 +43,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- ═══ Dependency versions（自然排序）═══ -->
-        <disruptor-biz.version>3.0.x.20260630-SNAPSHOT</disruptor-biz.version>
+        <disruptor-extension.version>3.0.x.20260630-SNAPSHOT</disruptor-extension.version>
         <junit-jupiter.version>6.1.0</junit-jupiter.version>
         <junit.version>4.13.2</junit.version>
         <lombok.version>1.18.46</lombok.version>
@@ -105,8 +105,8 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>disruptor-biz</artifactId>
-                <version>${disruptor-biz.version}</version>
+                <artifactId>disruptor-extension</artifactId>
+                <version>${disruptor-extension.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -154,7 +154,7 @@
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>disruptor-biz</artifactId>
+            <artifactId>disruptor-extension</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

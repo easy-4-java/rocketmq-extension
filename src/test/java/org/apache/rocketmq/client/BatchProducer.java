@@ -3,7 +3,7 @@ package org.apache.rocketmq.client;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.rocketmq.client.biz.hooks.MQProducerShutdownHook;
+import org.apache.rocketmq.client.extension.hooks.MQProducerShutdownHook;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.common.message.Message;
 

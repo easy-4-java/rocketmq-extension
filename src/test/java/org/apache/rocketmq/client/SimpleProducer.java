@@ -2,7 +2,7 @@ package org.apache.rocketmq.client;
 
 import java.util.Date;
 
-import org.apache.rocketmq.client.biz.hooks.MQProducerShutdownHook;
+import org.apache.rocketmq.client.extension.hooks.MQProducerShutdownHook;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
