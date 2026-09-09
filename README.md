@@ -29,7 +29,7 @@ publishing and subscription, with several consumption styles:
 | :-------------------------------------- | :----------------------------------------------------------------------- |
 | Plain consumption                       | `DefaultMessageConsumeListener` + retry on `RECONSUME_LATER`             |
 | Responsibility-chain consumption        | Route each message to the right handler by `Topic / Tags / Keys` (path-style expressions) |
-| Asynchronous consumption                | Disruptor-backed event dispatch (via `io.github.easy4j:disruptor-biz`)    |
+| Asynchronous consumption                | Disruptor-backed event dispatch (via `io.github.easy4j:disruptor-extension`)    |
 | Spring event consumption                | Publish each message as a Spring `ApplicationEvent` (`RocketmqEvent`)     |
 
 | Is                                                     | Is not                                          |
@@ -56,7 +56,7 @@ Typical scenarios:
 | Producer factory                               | Implemented | `MQProducerFactoryBean` (`ProducerConfig`, default `DefaultTransactionCheckListener`) |
 | Retry-aware consumption                        | Implemented | `DefaultMessageConsumeListener` — retries via `RECONSUME_LATER` up to `retryTimesWhenConsumeFailed` |
 | Responsibility-chain routing                  | Implemented | `MQEventHandlerFactoryBean` + `DefaultHandlerChainManager` + `PathMatchingHandlerChainResolver`; path expressions `/Topic/Tags/Keys` |
-| Disruptor async consumption                    | Implemented | `RocketmqDisruptorEvent`, `RocketmqDataEventFactory` / `RocketmqDataEventTranslator` (depends on `disruptor-biz`) |
+| Disruptor async consumption                    | Implemented | `RocketmqDisruptorEvent`, `RocketmqDataEventFactory` / `RocketmqDataEventTranslator` (depends on `disruptor-extension`) |
 | Spring ApplicationEvent consumption            | Implemented | `RocketmqEvent` (extends `ApplicationEvent`) + `ApplicationEventMessageHandler` |
 | Shutdown hooks                                 | Implemented | `MQProducerShutdownHook`, `MQPushConsumerShutdownHook`                       |
 | INI-style chain definitions                    | Implemented | `config.Ini` parser; `setHandlerChainDefinitions("...")` on the event-handler factory |
@@ -70,7 +70,7 @@ Typical scenarios:
 | Maven         | 3.0+ (wrapper included)                      |
 | RocketMQ      | 4.5.2 (`rocketmq-client`, `rocketmq-common`) |
 | Spring        | 4.3.11.RELEASE (`spring-beans`/`context`/`core`) |
-| disruptor-biz | `2.0.x.20260630-SNAPSHOT` (same line)          |
+| disruptor-extension | `2.0.x.20260630-SNAPSHOT` (same line)          |
 
 Version lines of the easy4j project:
 
@@ -99,10 +99,10 @@ Version lines of the easy4j project:
                         RocketmqEventMessageHandler
                               |               |           |
                     ApplicationEvent     Disruptor      plain handlers
-                    (Spring events)   (disruptor-biz)
+                    (Spring events)   (disruptor-extension)
 ```
 
-Single-module Maven project (`jar` packaging), root package `org.apache.rocketmq.client.biz`:
+Single-module Maven project (`jar` packaging), root package `org.apache.rocketmq.client.extension`:
 
 | Package                    | Responsibility                                    |
 | :------------------------- | :------------------------------------------------ |

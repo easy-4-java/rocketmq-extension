@@ -28,7 +28,7 @@ rocketmq-extension 是基于 RocketMQ 客户端（4.5.x）实现的轻量业务�
 | :----------------------- | :-------------------------------------------------------------------- |
 | 普通消费                 | `DefaultMessageConsumeListener` + `RECONSUME_LATER` 重试              |
 | 责任链消费               | 按 `Topic / Tags / Keys`（路径式表达式）将消息路由到对应 Handler      |
-| 异步消费                 | 基于 Disruptor 的事件分发（依赖 `io.github.easy4j:disruptor-biz`）     |
+| 异步消费                 | 基于 Disruptor 的事件分发（依赖 `io.github.easy4j:disruptor-extension`）     |
 | Spring 事件消费          | 将每条消息以 Spring `ApplicationEvent`（`RocketmqEvent`）发布          |
 
 | 是                                                     | 不是                                          |
@@ -55,7 +55,7 @@ rocketmq-extension 是基于 RocketMQ 客户端（4.5.x）实现的轻量业务�
 | 生产者工厂                                       | 已实现     | `MQProducerFactoryBean`（`ProducerConfig`，默认 `DefaultTransactionCheckListener`） |
 | 带重试的消费                                      | 已实现     | `DefaultMessageConsumeListener` —— 通过 `RECONSUME_LATER` 重试，上限 `retryTimesWhenConsumeFailed` |
 | 责任链路由                                       | 已实现     | `MQEventHandlerFactoryBean` + `DefaultHandlerChainManager` + `PathMatchingHandlerChainResolver`；路径表达式 `/Topic/Tags/Keys` |
-| Disruptor 异步消费                               | 已实现     | `RocketmqDisruptorEvent`、`RocketmqDataEventFactory` / `RocketmqDataEventTranslator`（依赖 `disruptor-biz`） |
+| Disruptor 异步消费                               | 已实现     | `RocketmqDisruptorEvent`、`RocketmqDataEventFactory` / `RocketmqDataEventTranslator`（依赖 `disruptor-extension`） |
 | Spring ApplicationEvent 消费                     | 已实现     | `RocketmqEvent`（继承 `ApplicationEvent`）+ `ApplicationEventMessageHandler` |
 | 关闭钩子                                         | 已实现     | `MQProducerShutdownHook`、`MQPushConsumerShutdownHook`               |
 | INI 格式链定义                                   | 已实现     | `config.Ini` 解析器；事件处理器工厂的 `setHandlerChainDefinitions("...")` |
@@ -69,7 +69,7 @@ rocketmq-extension 是基于 RocketMQ 客户端（4.5.x）实现的轻量业务�
 | Maven        | 3.0+（已内置 wrapper）                        |
 | RocketMQ     | 4.5.2（`rocketmq-client`、`rocketmq-common`）|
 | Spring       | 4.3.11.RELEASE（`spring-beans`/`context`/`core`）|
-| disruptor-biz| `2.0.x.20260630-SNAPSHOT`（同一版本线）         |
+| disruptor-extension| `2.0.x.20260630-SNAPSHOT`（同一版本线）         |
 
 easy4j 项目的版本线：
 
@@ -98,10 +98,10 @@ easy4j 项目的版本线：
                         RocketmqEventMessageHandler
                               |               |           |
                     ApplicationEvent     Disruptor     普通 Handler
-                    (Spring 事件)    (disruptor-biz)
+                    (Spring 事件)    (disruptor-extension)
 ```
 
-单模块 Maven 项目（`jar` 打包），根包 `org.apache.rocketmq.client.biz`：
+单模块 Maven 项目（`jar` 打包），根包 `org.apache.rocketmq.client.extension`：
 
 | 包                          | 职责                                              |
 | :-------------------------- | :------------------------------------------------ |
