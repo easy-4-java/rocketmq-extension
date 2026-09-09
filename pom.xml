@@ -42,7 +42,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <!-- ═══ Dependency versions（自然排序）═══ -->
-        <disruptor-biz.version>1.0.x.20260630-SNAPSHOT</disruptor-biz.version>
+        <disruptor-extension.version>1.0.x.20260630-SNAPSHOT</disruptor-extension.version>
         <junit-jupiter.version>5.11.4</junit-jupiter.version>
         <junit.version>4.13.2</junit.version>
         <lombok.version>1.18.46</lombok.version>
@@ -108,11 +108,11 @@
                 <artifactId>spring-core</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/${project.groupId}/disruptor-biz -->
+            <!-- https://mvnrepository.com/artifact/${project.groupId}/disruptor-extension -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>disruptor-biz</artifactId>
-                <version>${disruptor-biz.version}</version>
+                <artifactId>disruptor-extension</artifactId>
+                <version>${disruptor-extension.version}</version>
             </dependency>
             <!-- For Lombok -->
             <dependency>
@@ -167,10 +167,10 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/${project.groupId}/disruptor-biz -->
+        <!-- https://mvnrepository.com/artifact/${project.groupId}/disruptor-extension -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>disruptor-biz</artifactId>
+            <artifactId>disruptor-extension</artifactId>
         </dependency>
         <!-- For Lombok -->
         <dependency>
