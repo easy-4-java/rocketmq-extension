@@ -52,7 +52,7 @@
         <rocketmq.version>4.5.2</rocketmq.version>
         <servlet-api.version>3.0.1</servlet-api.version>
         <slf4j.version>2.0.18</slf4j.version>
-        <spring.version>6.2.0</spring.version>
+        <spring.version>7.0.8</spring.version>
         <!-- ═══ Maven Plugin versions（自然排序）═══ -->
         <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
         <flatten-maven-plugin.version>1.7.2</flatten-maven-plugin.version>
