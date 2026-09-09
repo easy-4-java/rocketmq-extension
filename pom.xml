@@ -65,10 +65,10 @@
         <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
         <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
     </properties>
-    <modules>
-        <module>rocketmq-extension-core</module>
-        <module>rocketmq-extension-spring</module>
-    </modules>
+    <subprojects>
+        <subproject>rocketmq-extension-core</subproject>
+        <subproject>rocketmq-extension-spring</subproject>
+    </subprojects>
     <dependencyManagement>
         <dependencies>
             <dependency>
